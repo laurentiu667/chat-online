@@ -26,6 +26,14 @@
             $data = $this->executeAction();
 
             $data["isConnected"] = $_SESSION["visibility"] > CommonAction::$VISIBILITY_PUBLIC;
+
+            if (!isset($_SESSION["username"])) {
+                $_SESSION["username"] = "Invité";
+            } else {
+                $data["username"] = $_SESSION["username"];
+            }
+          
+
             return $data;
         }
 

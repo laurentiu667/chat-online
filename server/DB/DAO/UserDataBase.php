@@ -27,6 +27,20 @@
             }
         }
 
+        public static function returnHashedPassword($username) {
+            try {
+                $connection = Connection::getConnection();
+                $sql = "SELECT psw FROM chat_online WHERE username = ?";
+                $statement = $connection->prepare($sql);
+                $statement->bindParam(1, $username);
+                $statement->execute();
+                $result = $statement->fetch();
+                return $result;
+            } catch (PDOException $e) {
+                echo "Erreur: " . $e->getMessage();
+            }
+        }
+
       
     }
         

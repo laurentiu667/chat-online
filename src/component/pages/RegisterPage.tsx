@@ -1,4 +1,4 @@
-import { useState, useRef  } from "react";
+import { useState  } from "react";
 interface DataUser {
     id: number;
     username: string;
@@ -53,7 +53,7 @@ function RegisterPage() {
         })
             .then((response) => response.json())
             .then((data: DataFetch) => {
-                // Vérification si 'data.user' est bien un tableau
+                // si c est un tableau
                 if (Array.isArray(data.user)) {
                     setData(data);
                     console.log('====================================');
@@ -83,7 +83,7 @@ function RegisterPage() {
 
     return (
         <div className=" h-full w-full z-50 grid place-items-center">
-            <div className="container-signup w-[80%] h-[70%] md:w-[500px] md:h-[500px] bg-black border border-main-color p-2 flex flex-col justify-between gap-4 rounded">
+            <div className="container-signup w-[80%] h-[500px] md:w-[500px] md:h-[500px] bg-black border border-main-color p-2 flex flex-col justify-between gap-4 rounded">
                 <h1 className="text-[2em] text-white self-center">Sign Up</h1>
                 <p className="alert-creation-account">{alertDivCreationAccount}</p>
                 <div className="flex flex-col gap-8">

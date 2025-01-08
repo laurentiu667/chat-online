@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+
 import Buttons from "./Buttons.tsx";
 import Title from "./title.tsx";
 
 function Header() {
     return (
+        
         <div className="pl-2 pr-2 border border-second-color  flex justify-between items-center">
           <Title link="/index" title={"chatitfy"} />
           

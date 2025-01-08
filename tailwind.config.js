@@ -12,7 +12,7 @@ export default {
         'second-color': 'var(--second-color)',
       },
       backgroundImage: {
-        'quadrillage': "url('public/quadrillage.svg')",
+        'quadrillage': "url('/quadrillage.svg')",
        
       }
     },
