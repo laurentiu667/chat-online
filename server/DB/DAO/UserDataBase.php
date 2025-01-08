@@ -1,13 +1,14 @@
 <?php
     require_once("Connection.php");
     class UserDataBase {
-        public static function enregistrement($username, $psw) {
+        public static function enregistrement($username, $psw, $email) {
             try {
                 $connection = Connection::getConnection();
-                $sql = "INSERT INTO chat_online(username, psw) VALUES (:username, :psw)";
+                $sql = "INSERT INTO chat_online(username, psw, email) VALUES (:username, :psw, :email)";
                 $statement = $connection->prepare($sql);
                 $statement->bindParam(1, $username);
                 $statement->bindParam(2, $psw);
+                $statement->bindParam(3, $email);
                 $statement->execute();
             } catch (PDOException $e) {
                 echo "Erreur: " . $e->getMessage();

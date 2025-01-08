@@ -5,7 +5,17 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'bg-color': 'var(--bg-color)', 
+        'main-color': 'var(--main-color)',
+        'second-color': 'var(--second-color)',
+      },
+      backgroundImage: {
+        'quadrillage': "url('public/quadrillage.svg')",
+       
+      }
+    },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-motion')], 
 }

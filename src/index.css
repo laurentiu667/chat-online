@@ -1,4 +1,45 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+:root {
+    --bg-color: #000000;
+    --main-color: #533ec8;
+    --second-color: #616161;
+}
 
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--second-color);
+    height: 100dvh;
+}
+#root {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 70px 1fr 30px;
+}
+main {
+    position: relative;
+  
+}
+.input-general{
+    height: 40px;
+    background-color: #533ec836;
+    color: var(--second-color);
+    padding-left: 4px;
+    
+
+}
+.input-general:focus{
+    border: 3px solid var(--main-color);
+    outline: none;
+  
+}
