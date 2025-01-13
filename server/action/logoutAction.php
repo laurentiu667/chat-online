@@ -4,10 +4,8 @@
     $action = new AjaxLogoutAction();
     $data = $action->execute();
     
-    header("Access-Control-Allow-Origin: *");
-    // Permet les méthodes que le serveur accepte
-    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-    // Permet les en-têtes que la requête peut inclure
-    header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
+    header('Access-Control-Allow-Origin: http://localhost:5173');
+    header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type');
     echo json_encode($data);

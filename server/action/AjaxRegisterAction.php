@@ -1,6 +1,7 @@
 <?php
     require_once("./CommonAction.php");
     require_once("../DB/DAO/UserDataBase.php");
+    
     class AjaxRegisterAction extends CommonAction {
 
         public function __construct() {
@@ -20,6 +21,7 @@
                     UserDataBase::enregistrement($username, $password_hash, $email);
                     // utilisateurs sera le tableau de tous les users donc interface dans ts doit inclure utilisateurs
                     $result = ["user" => UserDataBase::allUserReturn()];
+        
                     return compact("result");
                 } else {
                     $result = ["user" => "ERROR_PASSWORD_UNMATCH"];

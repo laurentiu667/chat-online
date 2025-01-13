@@ -8,6 +8,8 @@
         }
 
         protected function executeAction() {
+       
+            
             $result = ["message" => "Action exécutée avec succès"];
 
             return compact("result");

@@ -1,10 +1,11 @@
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 
 function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const toConnect = () => {
         let formData = new FormData();
@@ -14,13 +15,16 @@ function LoginPage() {
         fetch("http://localhost:8000/server/action/loginAction.php", {
             method: "POST",
             body: formData,
+            credentials: "include",
         })
             .then((response) => response.json())
             .then((data) => {
 
-                console.log('====================================');
-                console.log(data);
-                console.log('====================================');
+                if (data.isConnected === true) {
+                    navigate("/main");
+                } else {
+                    navigate("/index");
+                }
                 
             });
     };

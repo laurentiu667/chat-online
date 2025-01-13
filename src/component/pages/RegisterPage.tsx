@@ -12,7 +12,7 @@ interface DataFetch {
     user: DataUser[];
 }
 function RegisterPage() {
-    const [data, setData] = useState<DataFetch>({ user: [] });
+    // const [data, setData] = useState<DataFetch>({ user: [] });
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [secondpassword, setSecondpassword] = useState("");
@@ -50,12 +50,13 @@ function RegisterPage() {
         fetch("http://localhost:8000/server/action/registerAction.php", {
             method: "POST",
             body: formData,
+            credentials: 'include'
         })
             .then((response) => response.json())
             .then((data: DataFetch) => {
                 // si c est un tableau
                 if (Array.isArray(data.user)) {
-                    setData(data);
+                    // setData(data);
                     console.log('====================================');
                     console.log("voici les data user", data.user);
                     console.log('====================================');

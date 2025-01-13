@@ -1,41 +1,44 @@
 <?php
-    session_start();
 
-    abstract class CommonAction {
-        protected static $VISIBILITY_PUBLIC = 0;
-        protected static $VISIBILITY_MEMBER = 1;
-        protected static $VISIBILITY_MODERATOR = 2;
-        protected static $VISIBILITY_ADMINISTRATOR = 3; 
 
-        private $pageVisibility;
+session_start(); 
 
-        public function __construct($pageVisibility) {
-            $this->pageVisibility = $pageVisibility;
-        }
 
-        public function execute() {
-            if (!empty($_GET["logout"])) {
-                session_unset();
-                session_destroy();
-                session_start();
-            }
+abstract class CommonAction {
+    protected static $VISIBILITY_PUBLIC = 0;
+    protected static $VISIBILITY_MEMBER = 1;
+    protected static $VISIBILITY_MODERATOR = 2;
+    protected static $VISIBILITY_ADMINISTRATOR = 3; 
 
-            if (empty($_SESSION["visibility"])) {
-                $_SESSION["visibility"] = CommonAction::$VISIBILITY_PUBLIC;
-            }
-            $data = $this->executeAction();
+    private $pageVisibility;
 
-            $data["isConnected"] = $_SESSION["visibility"] > CommonAction::$VISIBILITY_PUBLIC;
-
-            if (!isset($_SESSION["username"])) {
-                $_SESSION["username"] = "Invité";
-            } else {
-                $data["username"] = $_SESSION["username"];
-            }
-          
-
-            return $data;
-        }
-
-        protected abstract function executeAction();
+    public function __construct($pageVisibility) {
+        $this->pageVisibility = $pageVisibility;
     }
+
+    public function execute() {
+        // Gestion de la déconnexion
+        if (!empty($_GET["logout"])) {
+            session_unset();
+            session_destroy();
+            session_start();
+        }
+
+        if (empty($_SESSION["visibility"])) {
+            $_SESSION["visibility"] = CommonAction::$VISIBILITY_PUBLIC;
+        }
+        $_SESSION["username"] = $_SESSION["username"] ?? "Invité";
+     
+
+        // Exécute l'action spécifique à la page
+        $data = $this->executeAction();
+
+        // Détermine si l'utilisateur est connecté
+        $data["isConnected"] = $_SESSION["visibility"] > CommonAction::$VISIBILITY_PUBLIC;
+
+       
+        return $data;
+    }
+
+    protected abstract function executeAction();
+}

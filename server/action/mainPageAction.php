@@ -1,7 +1,7 @@
 <?php
-    require_once("./AjaxMainAction.php");
+    require_once("./AjaxMainPageAction.php");
 
-    $action = new AjaxMainAction();
+    $action = new AjaxMainPageAction();
     $data = $action->execute();
     
     header('Access-Control-Allow-Origin: http://localhost:5173');
