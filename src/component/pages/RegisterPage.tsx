@@ -1,4 +1,5 @@
 import { useState  } from "react";
+import { useNavigate } from "react-router-dom";
 interface DataUser {
     id: number;
     username: string;
@@ -18,6 +19,7 @@ function RegisterPage() {
     const [secondpassword, setSecondpassword] = useState("");
     const [email, setEmail] = useState("");
     const [alertDivCreationAccount, setAlertDivCreationAccount] = useState("");
+    const navigate = useNavigate();
 
 
     const handleUsernameInput = (
@@ -61,6 +63,8 @@ function RegisterPage() {
                     console.log("voici les data user", data.user);
                     console.log('====================================');
                     setAlertDivCreationAccount("Account created successfully");
+                    navigate("/index");
+
                 } else {
                     if (data.user === "ERROR_PASSWORD_UNMATCH") {
                         

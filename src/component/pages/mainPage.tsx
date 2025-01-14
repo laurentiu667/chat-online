@@ -16,9 +16,10 @@ function mainPage() {
                     navigate("/index");
          
                 } else {
+                
                    
                     navigate("/main");
-                    setMessage("Welcome to the main page!");
+                    setMessage("salut : " + data.result.username);
                    
                    
                     
@@ -29,7 +30,7 @@ function mainPage() {
             });
     }, [navigate]);
     return (
-        <div>
+        <div className="">
             <h1>{message}</h1>
         </div>
     );

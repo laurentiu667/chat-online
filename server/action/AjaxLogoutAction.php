@@ -1,5 +1,5 @@
 <?php
-    require_once("action/CommonAction.php");
+    require_once("./CommonAction.php");
 
     class AjaxLogoutAction extends CommonAction {
 
@@ -8,7 +8,25 @@
         }
 
         protected function executeAction() {
+
+            $logout = $_POST["logout"] ?? null;
+       
+            if ($logout === "true") {
+                session_unset();
+                session_destroy();
+                session_start();
             
-            return [];
+              
+
+                $_SESSION["visibility"] = CommonAction::$VISIBILITY_PUBLIC;
+                $_SESSION["username"] = "Invité";
+
+             
+                $result = ['visibility' => $_SESSION["visibility"], 'username' => $_SESSION["username"]];
+            } 
+
+          
+          
+            return compact("result");
         }
     }
