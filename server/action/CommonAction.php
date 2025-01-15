@@ -22,6 +22,8 @@ abstract class CommonAction {
         if (empty($_SESSION["visibility"])) {
             $_SESSION["visibility"] = CommonAction::$VISIBILITY_PUBLIC;
         }
+
+        $_SESSION["token"] = $_SESSION["token"] ?? null;
         $_SESSION["username"] = $_SESSION["username"] ?? "Invité";
      
 
@@ -30,6 +32,7 @@ abstract class CommonAction {
 
         // Détermine si l'utilisateur est connecté
         $data["isConnected"] = $_SESSION["visibility"] > CommonAction::$VISIBILITY_PUBLIC;
+        $data["token"] = $_SESSION["token"] ?? null;
 
        
         return $data;

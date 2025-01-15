@@ -1,9 +1,14 @@
 <?php
     require_once("./CommonAction.php");
     require_once("../DB/DAO/UserDataBase.php");
-    
-    class AjaxLoginAction extends CommonAction {
+    require_once("../../vendor/autoload.php"); 
 
+    use Firebase\JWT\JWT;
+    use Firebase\JWT\Key;
+
+    class AjaxLoginAction extends CommonAction {
+        private const SECRET_KEY = "4f3c2e42b6e3127890dcd76584a1d74329de8e243b7d1d2f3c9b8e1f45a6c70d"; 
+        private const TOKEN_EXPIRATION = 3600;
         public function __construct() {
             parent::__construct(CommonAction::$VISIBILITY_PUBLIC);
         }
@@ -23,7 +28,9 @@
                     $_SESSION["visibility"] = CommonAction::$VISIBILITY_MEMBER;
                 
 
-                    $result = ["user" => "USER_CONNECTED", "username" => $_SESSION["username"]];
+                    $token = $this->tokenGenerator($username);
+                    $_SESSION["token"] = $token;
+                    $result = ["user" => "USER_CONNECTED", "username" => $_SESSION["username"], "token" => $_SESSION["token"]];
                     session_status();
                     return compact("result");
                 } else {
@@ -37,4 +44,19 @@
             }
           
         }
+
+        private function tokenGenerator($username) {
+            $issuedAt = time();
+            $expirationTime = $issuedAt + self::TOKEN_EXPIRATION; // Token expire après 1 heure
+    
+            $payload = [
+                "iat" => $issuedAt,         // Issued at
+                "exp" => $expirationTime,   // Expiration time
+                "username" => $username,    // Données de l'utilisateur
+            ];
+    
+            return JWT::encode($payload, self::SECRET_KEY, 'HS256');
+        }
+
+
     }

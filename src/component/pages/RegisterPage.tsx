@@ -1,4 +1,4 @@
-import { useState  } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 interface DataUser {
     id: number;
@@ -7,20 +7,16 @@ interface DataUser {
     email: string;
 }
 
-// l objet retourner
 interface DataFetch {
-    // ici l objet retourner contient
     user: DataUser[];
 }
 function RegisterPage() {
-    // const [data, setData] = useState<DataFetch>({ user: [] });
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [secondpassword, setSecondpassword] = useState("");
     const [email, setEmail] = useState("");
     const [alertDivCreationAccount, setAlertDivCreationAccount] = useState("");
     const navigate = useNavigate();
-
 
     const handleUsernameInput = (
         event: React.ChangeEvent<HTMLInputElement>
@@ -52,29 +48,29 @@ function RegisterPage() {
         fetch("http://localhost:8000/server/action/registerAction.php", {
             method: "POST",
             body: formData,
-            credentials: 'include'
+            credentials: "include",
         })
             .then((response) => response.json())
             .then((data: DataFetch) => {
                 // si c est un tableau
                 if (Array.isArray(data.user)) {
                     // setData(data);
-                    console.log('====================================');
+                    console.log("====================================");
                     console.log("voici les data user", data.user);
-                    console.log('====================================');
+                    console.log("====================================");
                     setAlertDivCreationAccount("Account created successfully");
-                    navigate("/index");
-
+                    setTimeout(() => {
+                        navigate("/login");
+                    }, 2000);
                 } else {
                     if (data.user === "ERROR_PASSWORD_UNMATCH") {
-                        
                         console.log(data.user);
                         setAlertDivCreationAccount("Passwords do not match");
                     } else if (data.user === "ERROR_MISSING_INFO") {
-                       
                         console.log(data.user);
-                        setAlertDivCreationAccount("Please fill in all the fields");
-                        
+                        setAlertDivCreationAccount(
+                            "Please fill in all the fields"
+                        );
                     }
                 }
             })
@@ -88,10 +84,16 @@ function RegisterPage() {
 
     return (
         <div className=" h-full w-full z-50 grid place-items-center">
-            <div className="container-signup w-[80%] h-[500px] md:w-[500px] md:h-[500px] bg-black border border-main-color p-2 flex flex-col justify-between gap-4 rounded">
-                <h1 className="text-[2em] text-white self-center">Sign Up</h1>
-                <p className="alert-creation-account">{alertDivCreationAccount}</p>
-                <div className="flex flex-col gap-8">
+            <div className="container-signup w-[80%] h-fit md:w-[500px] bg-black border border-main-color p-2 flex flex-col justify-between items-center gap-4 rounded ">
+                <span className="w-[90%] h-20 grid place-items-center">
+                    <a href="/register">
+                        <img src="public\enregistement.svg" alt="" />
+                    </a>
+                </span>
+                <p className="alert-creation-account text-center text-violet-500">
+                    {alertDivCreationAccount}
+                </p>
+                <div className="flex flex-col gap-8 w-full">
                     <input
                         onChange={handleEmailInput}
                         type="email"

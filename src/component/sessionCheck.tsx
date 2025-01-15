@@ -9,26 +9,26 @@ const SessionChecker = () => {
             }
         );
         const data = await response.json();
-        console.log("data", data);
-
-        if (data.isConnected) {
-            localStorage.setItem("isLoggedIn", "true");
-       
-            localStorage.setItem("username", data.result.username);
-        } else {
-            localStorage.setItem("isLoggedIn", "false");
-            localStorage.setItem("username", data.result.username);
-         
+   
+        try {
+            const base64Url = data.token.split(".")[1];
+            const payload = atob(base64Url);
+            const decodedToken = JSON.parse(payload);
+            console.log("decodedToken : ", decodedToken);
+            
+        } catch (error) {
+            console.log("error de decodage du token", error);
+            return null;
         }
     };
 
     useEffect(() => {
-        // Vérifiez la session toutes les 3 secondes
+        
         const intervalId = setInterval(() => {
             checkSession();
-        }, 3000);
+        }, 5000);
 
-        // Nettoyez l'intervalle lorsque le composant est démonté
+     
         return () => clearInterval(intervalId);
     }, []);
 
