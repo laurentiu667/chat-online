@@ -1,5 +1,4 @@
-import Header from "../src/component/Header";
-import Footer from "../src/component/Footer";
+import React from "react";
 import {
     BrowserRouter as Router,
     Routes,
@@ -12,40 +11,39 @@ import IndexPage from "./component/pages/IndexPage";
 import LoginPage from "./component/pages/LoginPage";
 import MainPage from "./component/pages/mainPage";
 import Blob from "./component/blob";
-import { AuthProvider } from "./component/authentification"; 
+
+import Header from "./component/Header";
+import Footer from "./component/Footer";
+import SessionChecker from "./component/sessionCheck";
 
 function App() {
     return (
-        <AuthProvider> {/* Fournisseur du contexte */}
-            <Router>
-                <Blob
-                    height={"70%"}
-                    width={"40%"}
-                    color="#533ec8"
-                    top={"0px"}
-                    left={"0px"}
-                />
-                <Blob
-                    height={"70%"}
-                    width={"40%"}
-                    color="#533ec8"
-                    top={"50%"}
-                    left={"60%"}
-                />
-                <Header />
-
-                <main className="">
-                    <Routes>
-                        <Route path="/" element={<Navigate to="/index" />} />
-                        <Route path="/index" element={<IndexPage />} />
-                        <Route path="/register" element={<RegisterPage />} />
-                        <Route path="/login" element={<LoginPage />} />
-                        <Route path="/main" element={<MainPage />} />
-                    </Routes>
-                </main>
-                <Footer />
-            </Router>
-        </AuthProvider>
+        <Router>
+            <Blob
+                height="70%"
+                width="40%"
+                color="#533ec8"
+                top="0px"
+                left="0px"
+            />
+            <Blob
+                height="70%"
+                width="40%"
+                color="#533ec8"
+                top="50%"
+                left="60%"
+            />
+            <Header />
+            <SessionChecker />
+            <Routes>
+                <Route path="/index" element={<IndexPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/main" element={<MainPage />} />
+                <Route path="*" element={<Navigate to="/index" />} />
+            </Routes>
+            <Footer />
+        </Router>
     );
 }
 

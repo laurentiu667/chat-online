@@ -1,8 +1,9 @@
 <?php
-    require_once("./AjaxLogoutAction.php");
+    require_once("./AjaxMainAction.php");
 
-    $action = new AjaxLogoutAction();
+    $action = new AjaxMainAction();
     $data = $action->execute();
+
     
     header('Access-Control-Allow-Origin: http://localhost:5173');
     header('Access-Control-Allow-Credentials: true');

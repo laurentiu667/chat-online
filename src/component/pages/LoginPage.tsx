@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthentification } from "../authentification";
+
 
 function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const { setIsLoggedIn, setUsernameAuth } = useAuthentification();
+
     const navigate = useNavigate();
 
     const toConnect = () => {
@@ -23,11 +23,13 @@ function LoginPage() {
 
                 if (data.isConnected === true) {
                     navigate("/main");
-                    setIsLoggedIn(true);
+                
                     console.log(data.result.username);
                     
-                    setUsernameAuth(data.result.username);
-                } 
+                    localStorage.setItem("username", data.result.username);
+                } else {
+                    navigate("/index");
+                }
                 
             });
     };

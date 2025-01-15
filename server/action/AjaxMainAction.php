@@ -11,7 +11,7 @@
        
        
             
-            $result = ["message" => "Action exécutée avec succès"];
+            $result = ["message" => "Action exécutée avec succès", "username" => $_SESSION["username"]];
 
             return compact("result");
         }
