@@ -9,55 +9,48 @@ function MainPage() {
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        if (localStorage.getItem("isLoggedIn") === "true") {
-            const ws = new WebSocket("ws://localhost:8080");
+        const ws = new WebSocket("ws://localhost:8080");
 
-            ws.onopen = () => {
-                console.log("Connected to WebSocket");
-            };
+        ws.onopen = () => {
+            console.log("Connected to WebSocket");
+        };
 
-            ws.onmessage = (event) => {
-                try {
-                    // Analysez les données reçues (supposons qu'elles soient envoyées sous forme de JSON)
-                    const data = JSON.parse(event.data);
+        ws.onmessage = (event) => {
+            try {
+                // Analysez les données reçues (supposons qu'elles soient envoyées sous forme de JSON)
+                const data = JSON.parse(event.data);
 
-                    // Ajoutez un message avec le nom d'utilisateur dans le tableau des messages
-                    const messageWithSender = `${data.username}: ${data.message}`;
+                // Ajoutez un message avec le nom d'utilisateur dans le tableau des messages
+                const messageWithSender = `${data.username}: ${data.message}`;
 
-                    // Mettez à jour l'état avec les nouveaux messages
-                    setMessages((prevMessages) => [
-                        ...prevMessages,
-                        messageWithSender,
-                    ]);
+                // Mettez à jour l'état avec les nouveaux messages
+                setMessages((prevMessages) => [
+                    ...prevMessages,
+                    messageWithSender,
+                ]);
 
-                    console.log("Received message:", messageWithSender);
-                } catch (error) {
-                    console.error("Error parsing message:", error);
-                }
-            };
+                console.log("Received message:", messageWithSender);
+            } catch (error) {
+                console.error("Error parsing message:", error);
+            }
+        };
 
-            ws.onclose = () => {
-                if (
-                    localStorage.getItem("isLoggedIn") === "false" ||
-                    localStorage.getItem("token") === "expired"
-                ) {
-                    ws.close();
-                    setSocket(null);
-                    console.log("Disconnected from WebSocket");
-                    // alert("le token a expirer svp reconnectez vous")
-                }
-            };
-
-            setSocket(ws);
-            return () => {
+        ws.onclose = () => {
+            if (
+                localStorage.getItem("isLoggedIn") === "false" ||
+                localStorage.getItem("token") === "expired"
+            ) {
                 ws.close();
-            };
-        } else {
-            console.log("====================================");
-            console.log("not connected, so not server nigga");
-            console.log("====================================");
-            navigate("/index");
-        }
+                setSocket(null);
+                console.log("Disconnected from WebSocket");
+                // alert("le token a expirer svp reconnectez vous")
+            }
+        };
+
+        setSocket(ws);
+        return () => {
+            ws.close();
+        };
     }, []); // que cela se lance une seul fois
 
     const sendMessage = () => {

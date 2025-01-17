@@ -21,13 +21,13 @@ const SessionChecker = () => {
             console.log("decodedToken : ", decodedToken);
             console.log("data", data);
 
-            // Vérification de l'expiration du token
-            const currentTime = Math.floor(Date.now() / 1000); // Temps actuel en secondes
+          
+            const currentTime = Math.floor(Date.now() / 1000); 
             if (decodedToken.exp < currentTime) {
                 localStorage.removeItem("token");
                 console.log("Le token a expiré !");
                 logout();
-                // Traitez l'expiration ici (par exemple, rediriger ou supprimer le token)
+              
             } else {
                 console.log("Le token est toujours valide.");
             }
@@ -40,9 +40,9 @@ const SessionChecker = () => {
     useEffect(() => {
         const intervalId = setInterval(() => {
             checkSession();
-        }, 5000); // Vérification toutes les secondes
+        }, 1000); 
 
-        // Nettoyer l'intervalle lorsque le composant est démonté
+   
         return () => clearInterval(intervalId);
     }, []);
 

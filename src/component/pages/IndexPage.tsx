@@ -1,8 +1,10 @@
 import Buttons from "../Buttons";
 import { useHeader } from "../../context/headerContext";
 
-function IndexPage() {
-    const { isLoggedIn } = useHeader();
+function IndexPage({ role }: { role: any }) {
+
+    // const { isLoggedIn, username, logout } = useHeader();
+   
     return (
         <div className="h-full w-full z-50 grid place-items-center">
             <div className="-z-10 bg-quadrillage absolute h-[80%] w-[50%] bg-no-repeat bg-cover top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 "></div>
@@ -20,7 +22,7 @@ function IndexPage() {
                 <p className="text-[0.7em] sm:text-[1em] md:text-[1em] lg:text-[1em]">
                     Création d'un compte gratuit et service gratuit
                 </p>
-                {isLoggedIn ? (
+                {role > 0  ? (
                     <>
                         <p className="text-green-300">
                             Vous êtes actuellement connecté

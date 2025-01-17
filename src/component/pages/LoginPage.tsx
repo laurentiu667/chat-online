@@ -24,10 +24,8 @@ function LoginPage() {
                 if (data.isConnected === true) {
                     login(data.result.username);
                     localStorage.setItem("token", data.token);
+
                     navigate("/main");
-                } else {
-                    logout();
-                    navigate("/index");
                 }
             });
     };
