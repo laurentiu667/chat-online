@@ -1,25 +1,13 @@
 
-import Title from "./title";
 import Buttons from "./Buttons";
 import { useHeader } from "../context/headerContext"; 
-import { useNavigate } from "react-router-dom";
+
 
 function Header() {
     const { isLoggedIn, username, logout } = useHeader(); 
-    const navigate = useNavigate();
+
     const clickLogout = () => {
         logout();
-        navigate("/index");
-  
-        let form = new FormData();
-        form.append("logout", "true");
-        fetch("http://localhost:8000/server/action/logoutAction.php", {
-            method: "POST",
-            body: form,
-            credentials: "include",
-        })
-        .then((response) => response.json());
-      
     };
 
     return (

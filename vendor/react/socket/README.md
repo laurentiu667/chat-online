@@ -18,41 +18,41 @@ handle multiple concurrent connections without blocking.
 
 **Table of Contents**
 
-* [Quickstart example](#quickstart-example)
-* [Connection usage](#connection-usage)
-  * [ConnectionInterface](#connectioninterface)
-    * [getRemoteAddress()](#getremoteaddress)
-    * [getLocalAddress()](#getlocaladdress)
-* [Server usage](#server-usage)
-  * [ServerInterface](#serverinterface)
-    * [connection event](#connection-event)
-    * [error event](#error-event)
-    * [getAddress()](#getaddress)
-    * [pause()](#pause)
-    * [resume()](#resume)
-    * [close()](#close)
-  * [SocketServer](#socketserver)
-  * [Advanced server usage](#advanced-server-usage)
-    * [TcpServer](#tcpserver)
-    * [SecureServer](#secureserver)
-    * [UnixServer](#unixserver)
-    * [LimitingServer](#limitingserver)
-      * [getConnections()](#getconnections)
-* [Client usage](#client-usage)
-  * [ConnectorInterface](#connectorinterface)
-    * [connect()](#connect)
-  * [Connector](#connector)
-  * [Advanced client usage](#advanced-client-usage)
-    * [TcpConnector](#tcpconnector)
-    * [HappyEyeBallsConnector](#happyeyeballsconnector)
-    * [DnsConnector](#dnsconnector)
-    * [SecureConnector](#secureconnector)
-    * [TimeoutConnector](#timeoutconnector)
-    * [UnixConnector](#unixconnector)
-    * [FixUriConnector](#fixeduriconnector)
-* [Install](#install)
-* [Tests](#tests)
-* [License](#license)
+- [Quickstart example](#quickstart-example)
+- [Connection usage](#connection-usage)
+    - [ConnectionInterface](#connectioninterface)
+        - [getRemoteAddress()](#getremoteaddress)
+        - [getLocalAddress()](#getlocaladdress)
+- [Server usage](#server-usage)
+    - [ServerInterface](#serverinterface)
+        - [connection event](#connection-event)
+        - [error event](#error-event)
+        - [getAddress()](#getaddress)
+        - [pause()](#pause)
+        - [resume()](#resume)
+        - [close()](#close)
+    - [SocketServer](#socketserver)
+    - [Advanced server usage](#advanced-server-usage)
+        - [TcpServer](#tcpserver)
+        - [SecureServer](#secureserver)
+        - [UnixServer](#unixserver)
+        - [LimitingServer](#limitingserver)
+            - [getConnections()](#getconnections)
+- [Client usage](#client-usage)
+    - [ConnectorInterface](#connectorinterface)
+        - [connect()](#connect)
+    - [Connector](#connector)
+    - [Advanced client usage](#advanced-client-usage)
+        - [TcpConnector](#tcpconnector)
+        - [HappyEyeBallsConnector](#happyeyeballsconnector)
+        - [DnsConnector](#dnsconnector)
+        - [SecureConnector](#secureconnector)
+        - [TimeoutConnector](#timeoutconnector)
+        - [UnixConnector](#unixconnector)
+        - [FixUriConnector](#fixeduriconnector)
+- [Install](#install)
+- [Tests](#tests)
+- [License](#license)
 
 ## Quickstart example
 
@@ -409,9 +409,9 @@ $second = new React\Socket\SocketServer('127.0.0.1:8080');
 ```
 
 > Note that these error conditions may vary depending on your system and/or
-  configuration.
-  See the exception message and code for more details about the actual error
-  condition.
+> configuration.
+> See the exception message and code for more details about the actual error
+> condition.
 
 Optionally, you can specify [TCP socket context options](https://www.php.net/manual/en/context.socket.php)
 for the underlying stream socket resource like this:
@@ -427,10 +427,10 @@ $socket = new React\Socket\SocketServer('[::1]:8080', array(
 ```
 
 > Note that available [socket context options](https://www.php.net/manual/en/context.socket.php),
-  their defaults and effects of changing these may vary depending on your system
-  and/or PHP version.
-  Passing unknown context options has no effect.
-  The `backlog` context option defaults to `511` unless given explicitly.
+> their defaults and effects of changing these may vary depending on your system
+> and/or PHP version.
+> Passing unknown context options has no effect.
+> The `backlog` context option defaults to `511` unless given explicitly.
 
 You can start a secure TLS (formerly known as SSL) server by simply prepending
 the `tls://` URI scheme.
@@ -449,9 +449,9 @@ $socket = new React\Socket\SocketServer('tls://127.0.0.1:8080', array(
 ```
 
 > Note that the certificate file will not be loaded on instantiation but when an
-  incoming connection initializes its TLS context.
-  This implies that any invalid certificate file paths or contents will only cause
-  an `error` event at a later time.
+> incoming connection initializes its TLS context.
+> This implies that any invalid certificate file paths or contents will only cause
+> an `error` event at a later time.
 
 If your private key is encrypted with a passphrase, you have to specify it
 like this:
@@ -479,13 +479,13 @@ $socket = new React\Socket\SocketServer('tls://127.0.0.1:8000', array(
 ```
 
 > Note that available [TLS context options](https://www.php.net/manual/en/context.ssl.php),
-  their defaults and effects of changing these may vary depending on your system
-  and/or PHP version.
-  The outer context array allows you to also use `tcp` (and possibly more)
-  context options at the same time.
-  Passing unknown context options has no effect.
-  If you do not use the `tls://` scheme, then passing `tls` context options
-  has no effect.
+> their defaults and effects of changing these may vary depending on your system
+> and/or PHP version.
+> The outer context array allows you to also use `tcp` (and possibly more)
+> context options at the same time.
+> Passing unknown context options has no effect.
+> If you do not use the `tls://` scheme, then passing `tls` context options
+> has no effect.
 
 Whenever a client connects, it will emit a `connection` event with a connection
 instance implementing [`ConnectionInterface`](#connectioninterface):
@@ -493,7 +493,7 @@ instance implementing [`ConnectionInterface`](#connectioninterface):
 ```php
 $socket->on('connection', function (React\Socket\ConnectionInterface $connection) {
     echo 'Plaintext connection from ' . $connection->getRemoteAddress() . PHP_EOL;
-    
+
     $connection->write('hello there!' . PHP_EOL);
     …
 });
@@ -508,12 +508,12 @@ This value SHOULD NOT be given unless you're sure you want to explicitly use a
 given event loop instance.
 
 > Note that the `SocketServer` class is a concrete implementation for TCP/IP sockets.
-  If you want to typehint in your higher-level protocol implementation, you SHOULD
-  use the generic [`ServerInterface`](#serverinterface) instead.
+> If you want to typehint in your higher-level protocol implementation, you SHOULD
+> use the generic [`ServerInterface`](#serverinterface) instead.
 
 > Changelog v1.9.0: This class has been added with an improved constructor signature
-  as a replacement for the previous `Server` class in order to avoid any ambiguities.
-  The previous name has been deprecated and should not be used anymore.
+> as a replacement for the previous `Server` class in order to avoid any ambiguities.
+> The previous name has been deprecated and should not be used anymore.
 
 ### Advanced server usage
 
@@ -572,9 +572,9 @@ $second = new React\Socket\TcpServer(8080);
 ```
 
 > Note that these error conditions may vary depending on your system and/or
-configuration.
-See the exception message and code for more details about the actual error
-condition.
+> configuration.
+> See the exception message and code for more details about the actual error
+> condition.
 
 This class takes an optional `LoopInterface|null $loop` parameter that can be used to
 pass the event loop instance to use for this object. You can use a `null` value
@@ -594,10 +594,10 @@ $server = new React\Socket\TcpServer('[::1]:8080', null, array(
 ```
 
 > Note that available [socket context options](https://www.php.net/manual/en/context.socket.php),
-their defaults and effects of changing these may vary depending on your system
-and/or PHP version.
-Passing unknown context options has no effect.
-The `backlog` context option defaults to `511` unless given explicitly.
+> their defaults and effects of changing these may vary depending on your system
+> and/or PHP version.
+> Passing unknown context options has no effect.
+> The `backlog` context option defaults to `511` unless given explicitly.
 
 Whenever a client connects, it will emit a `connection` event with a connection
 instance implementing [`ConnectionInterface`](#connectioninterface):
@@ -605,7 +605,7 @@ instance implementing [`ConnectionInterface`](#connectioninterface):
 ```php
 $server->on('connection', function (React\Socket\ConnectionInterface $connection) {
     echo 'Plaintext connection from ' . $connection->getRemoteAddress() . PHP_EOL;
-    
+
     $connection->write('hello there!' . PHP_EOL);
     …
 });
@@ -632,9 +632,9 @@ $server = new React\Socket\SecureServer($server, null, array(
 ```
 
 > Note that the certificate file will not be loaded on instantiation but when an
-incoming connection initializes its TLS context.
-This implies that any invalid certificate file paths or contents will only cause
-an `error` event at a later time.
+> incoming connection initializes its TLS context.
+> This implies that any invalid certificate file paths or contents will only cause
+> an `error` event at a later time.
 
 If your private key is encrypted with a passphrase, you have to specify it
 like this:
@@ -660,9 +660,9 @@ $server = new React\Socket\SecureServer($server, null, array(
 ```
 
 > Note that available [TLS context options](https://www.php.net/manual/en/context.ssl.php),
-their defaults and effects of changing these may vary depending on your system
-and/or PHP version.
-Passing unknown context options has no effect.
+> their defaults and effects of changing these may vary depending on your system
+> and/or PHP version.
+> Passing unknown context options has no effect.
 
 Whenever a client completes the TLS handshake, it will emit a `connection` event
 with a connection instance implementing [`ConnectionInterface`](#connectioninterface):
@@ -670,7 +670,7 @@ with a connection instance implementing [`ConnectionInterface`](#connectioninter
 ```php
 $server->on('connection', function (React\Socket\ConnectionInterface $connection) {
     echo 'Secure connection from' . $connection->getRemoteAddress() . PHP_EOL;
-    
+
     $connection->write('hello there!' . PHP_EOL);
     …
 });
@@ -698,18 +698,18 @@ This value SHOULD NOT be given unless you're sure you want to explicitly use a
 given event loop instance.
 
 > Advanced usage: Despite allowing any `ServerInterface` as first parameter,
-you SHOULD pass a `TcpServer` instance as first parameter, unless you
-know what you're doing.
-Internally, the `SecureServer` has to set the required TLS context options on
-the underlying stream resources.
-These resources are not exposed through any of the interfaces defined in this
-package, but only through the internal `Connection` class.
-The `TcpServer` class is guaranteed to emit connections that implement
-the `ConnectionInterface` and uses the internal `Connection` class in order to
-expose these underlying resources.
-If you use a custom `ServerInterface` and its `connection` event does not
-meet this requirement, the `SecureServer` will emit an `error` event and
-then close the underlying connection.
+> you SHOULD pass a `TcpServer` instance as first parameter, unless you
+> know what you're doing.
+> Internally, the `SecureServer` has to set the required TLS context options on
+> the underlying stream resources.
+> These resources are not exposed through any of the interfaces defined in this
+> package, but only through the internal `Connection` class.
+> The `TcpServer` class is guaranteed to emit connections that implement
+> the `ConnectionInterface` and uses the internal `Connection` class in order to
+> expose these underlying resources.
+> If you use a custom `ServerInterface` and its `connection` event does not
+> meet this requirement, the `SecureServer` will emit an `error` event and
+> then close the underlying connection.
 
 #### UnixServer
 
@@ -735,12 +735,12 @@ $second = new React\Socket\UnixServer('/tmp/same.sock');
 ```
 
 > Note that these error conditions may vary depending on your system and/or
-  configuration.
-  In particular, Zend PHP does only report "Unknown error" when the UDS path
-  already exists and can not be bound. You may want to check `is_file()` on the
-  given UDS path to report a more user-friendly error message in this case.
-  See the exception message and code for more details about the actual error
-  condition.
+> configuration.
+> In particular, Zend PHP does only report "Unknown error" when the UDS path
+> already exists and can not be bound. You may want to check `is_file()` on the
+> given UDS path to report a more user-friendly error message in this case.
+> See the exception message and code for more details about the actual error
+> condition.
 
 This class takes an optional `LoopInterface|null $loop` parameter that can be used to
 pass the event loop instance to use for this object. You can use a `null` value
@@ -769,10 +769,11 @@ for limiting and keeping track of open connections to this server instance.
 
 Whenever the underlying server emits a `connection` event, it will check its
 limits and then either
- - keep track of this connection by adding it to the list of
-   open connections and then forward the `connection` event
- - or reject (close) the connection when its limits are exceeded and will
-   forward an `error` event instead.
+
+- keep track of this connection by adding it to the list of
+  open connections and then forward the `connection` event
+- or reject (close) the connection when its limits are exceeded and will
+  forward an `error` event instead.
 
 Whenever a connection closes, it will remove this connection from the list of
 open connections.
@@ -923,9 +924,9 @@ $connector->connect('www.google.com:80')->then(function (React\Socket\Connection
 ```
 
 > If you do no specify a URI scheme in the destination URI, it will assume
-  `tcp://` as a default and establish a plaintext TCP/IP connection.
-  Note that TCP/IP connections require a host and port part in the destination
-  URI like above, all other URI components are optional.
+> `tcp://` as a default and establish a plaintext TCP/IP connection.
+> Note that TCP/IP connections require a host and port part in the destination
+> URI like above, all other URI components are optional.
 
 In order to create a secure TLS connection, you can use the `tls://` URI scheme
 like this:
@@ -948,12 +949,12 @@ $connector->connect('unix:///tmp/demo.sock')->then(function (React\Socket\Connec
 ```
 
 > The [`getRemoteAddress()`](#getremoteaddress) method will return the target
-  Unix domain socket (UDS) path as given to the `connect()` method, including
-  the `unix://` scheme, for example `unix:///tmp/demo.sock`.
-  The [`getLocalAddress()`](#getlocaladdress) method will most likely return a
-  `null` value as this value is not applicable to UDS connections here.
+> Unix domain socket (UDS) path as given to the `connect()` method, including
+> the `unix://` scheme, for example `unix:///tmp/demo.sock`.
+> The [`getLocalAddress()`](#getlocaladdress) method will most likely return a
+> `null` value as this value is not applicable to UDS connections here.
 
-Under the hood, the `Connector` is implemented as a *higher-level facade*
+Under the hood, the `Connector` is implemented as a _higher-level facade_
 for the lower-level connectors implemented in this package. This means it
 also shares all of their features and implementation details.
 If you want to typehint in your higher-level protocol implementation, you SHOULD
@@ -1097,8 +1098,8 @@ $connector = new React\Socket\Connector(array(
 ```
 
 > For more details about context options, please refer to the PHP documentation
-  about [socket context options](https://www.php.net/manual/en/context.socket.php)
-  and [SSL context options](https://www.php.net/manual/en/context.ssl.php).
+> about [socket context options](https://www.php.net/manual/en/context.socket.php)
+> and [SSL context options](https://www.php.net/manual/en/context.ssl.php).
 
 Advanced: By default, the `Connector` supports the `tcp://`, `tls://` and
 `unix://` URI schemes.
@@ -1131,16 +1132,16 @@ $connector->connect('google.com:80')->then(function (React\Socket\ConnectionInte
 ```
 
 > Internally, the `tcp://` connector will always be wrapped by the DNS resolver,
-  unless you disable DNS like in the above example. In this case, the `tcp://`
-  connector receives the actual hostname instead of only the resolved IP address
-  and is thus responsible for performing the lookup.
-  Internally, the automatically created `tls://` connector will always wrap the
-  underlying `tcp://` connector for establishing the underlying plaintext
-  TCP/IP connection before enabling secure TLS mode. If you want to use a custom
-  underlying `tcp://` connector for secure TLS connections only, you may
-  explicitly pass a `tls://` connector like above instead.
-  Internally, the `tcp://` and `tls://` connectors will always be wrapped by
-  `TimeoutConnector`, unless you disable timeouts like in the above example.
+> unless you disable DNS like in the above example. In this case, the `tcp://`
+> connector receives the actual hostname instead of only the resolved IP address
+> and is thus responsible for performing the lookup.
+> Internally, the automatically created `tls://` connector will always wrap the
+> underlying `tcp://` connector for establishing the underlying plaintext
+> TCP/IP connection before enabling secure TLS mode. If you want to use a custom
+> underlying `tcp://` connector for secure TLS connections only, you may
+> explicitly pass a `tls://` connector like above instead.
+> Internally, the `tcp://` and `tls://` connectors will always be wrapped by
+> `TimeoutConnector`, unless you disable timeouts like in the above example.
 
 This class takes an optional `LoopInterface|null $loop` parameter that can be used to
 pass the event loop instance to use for this object. You can use a `null` value
@@ -1218,19 +1219,19 @@ the remote host rejects the connection etc.), it will reject with a
 
 If you want to connect to hostname-port-combinations, see also the following chapter.
 
-> Advanced usage: Internally, the `TcpConnector` allocates an empty *context*
-resource for each stream resource.
-If the destination URI contains a `hostname` query parameter, its value will
-be used to set up the TLS peer name.
-This is used by the `SecureConnector` and `DnsConnector` to verify the peer
-name and can also be used if you want a custom TLS peer name.
+> Advanced usage: Internally, the `TcpConnector` allocates an empty _context_
+> resource for each stream resource.
+> If the destination URI contains a `hostname` query parameter, its value will
+> be used to set up the TLS peer name.
+> This is used by the `SecureConnector` and `DnsConnector` to verify the peer
+> name and can also be used if you want a custom TLS peer name.
 
 #### HappyEyeBallsConnector
 
 The `HappyEyeBallsConnector` class implements the
 [`ConnectorInterface`](#connectorinterface) and allows you to create plaintext
-TCP/IP connections to any hostname-port-combination. Internally it implements the 
-happy eyeballs algorithm from [`RFC6555`](https://tools.ietf.org/html/rfc6555) and 
+TCP/IP connections to any hostname-port-combination. Internally it implements the
+happy eyeballs algorithm from [`RFC6555`](https://tools.ietf.org/html/rfc6555) and
 [`RFC8305`](https://tools.ietf.org/html/rfc8305) to support IPv6 and IPv4 hostnames.
 
 It does so by decorating a given `TcpConnector` instance so that it first
@@ -1271,16 +1272,16 @@ This value SHOULD NOT be given unless you're sure you want to explicitly use a
 given event loop instance.
 
 > Advanced usage: Internally, the `HappyEyeBallsConnector` relies on a `Resolver` to
-look up the IP addresses for the given hostname.
-It will then replace the hostname in the destination URI with this IP's and
-append a `hostname` query parameter and pass this updated URI to the underlying
-connector. 
-The Happy Eye Balls algorithm describes looking the IPv6 and IPv4 address for 
-the given hostname so this connector sends out two DNS lookups for the A and 
-AAAA records. It then uses all IP addresses (both v6 and v4) and tries to 
-connect to all of them with a 50ms interval in between. Alterating between IPv6 
-and IPv4 addresses. When a connection is established all the other DNS lookups 
-and connection attempts are cancelled.
+> look up the IP addresses for the given hostname.
+> It will then replace the hostname in the destination URI with this IP's and
+> append a `hostname` query parameter and pass this updated URI to the underlying
+> connector.
+> The Happy Eye Balls algorithm describes looking the IPv6 and IPv4 address for
+> the given hostname so this connector sends out two DNS lookups for the A and
+> AAAA records. It then uses all IP addresses (both v6 and v4) and tries to
+> connect to all of them with a 50ms interval in between. Alterating between IPv6
+> and IPv4 addresses. When a connection is established all the other DNS lookups
+> and connection attempts are cancelled.
 
 #### DnsConnector
 
@@ -1320,15 +1321,15 @@ Calling `cancel()` on a pending promise will cancel the underlying DNS lookup
 and/or the underlying TCP/IP connection and reject the resulting promise.
 
 > Advanced usage: Internally, the `DnsConnector` relies on a `React\Dns\Resolver\ResolverInterface`
-to look up the IP address for the given hostname.
-It will then replace the hostname in the destination URI with this IP and
-append a `hostname` query parameter and pass this updated URI to the underlying
-connector.
-The underlying connector is thus responsible for creating a connection to the
-target IP address, while this query parameter can be used to check the original
-hostname and is used by the `TcpConnector` to set up the TLS peer name.
-If a `hostname` is given explicitly, this query parameter will not be modified,
-which can be useful if you want a custom TLS peer name.
+> to look up the IP address for the given hostname.
+> It will then replace the hostname in the destination URI with this IP and
+> append a `hostname` query parameter and pass this updated URI to the underlying
+> connector.
+> The underlying connector is thus responsible for creating a connection to the
+> target IP address, while this query parameter can be used to check the original
+> hostname and is used by the `TcpConnector` to set up the TLS peer name.
+> If a `hostname` is given explicitly, this query parameter will not be modified,
+> which can be useful if you want a custom TLS peer name.
 
 #### SecureConnector
 
@@ -1390,13 +1391,13 @@ $secureConnector = new React\Socket\SecureConnector($dnsConnector, null, array(
 ```
 
 > Advanced usage: Internally, the `SecureConnector` relies on setting up the
-required *context options* on the underlying stream resource.
-It should therefor be used with a `TcpConnector` somewhere in the connector
-stack so that it can allocate an empty *context* resource for each stream
-resource and verify the peer name.
-Failing to do so may result in a TLS peer name mismatch error or some hard to
-trace race conditions, because all stream resources will use a single, shared
-*default context* resource otherwise.
+> required _context options_ on the underlying stream resource.
+> It should therefor be used with a `TcpConnector` somewhere in the connector
+> stack so that it can allocate an empty _context_ resource for each stream
+> resource and verify the peer name.
+> Failing to do so may result in a TLS peer name mismatch error or some hard to
+> trace race conditions, because all stream resources will use a single, shared
+> _default context_ resource otherwise.
 
 #### TimeoutConnector
 
@@ -1454,10 +1455,10 @@ settle (either resolve or reject) immediately.
 As such, calling `cancel()` on the resulting promise has no effect.
 
 > The [`getRemoteAddress()`](#getremoteaddress) method will return the target
-  Unix domain socket (UDS) path as given to the `connect()` method, prepended
-  with the `unix://` scheme, for example `unix:///tmp/demo.sock`.
-  The [`getLocalAddress()`](#getlocaladdress) method will most likely return a
-  `null` value as this value is not applicable to UDS connections here.
+> Unix domain socket (UDS) path as given to the `connect()` method, prepended
+> with the `unix://` scheme, for example `unix:///tmp/demo.sock`.
+> The [`getLocalAddress()`](#getlocaladdress) method will most likely return a
+> `null` value as this value is not applicable to UDS connections here.
 
 This class takes an optional `LoopInterface|null $loop` parameter that can be used to
 pass the event loop instance to use for this object. You can use a `null` value
@@ -1501,7 +1502,7 @@ See also the [CHANGELOG](CHANGELOG.md) for details about version upgrades.
 
 This project aims to run on any platform and thus does not require any PHP
 extensions and supports running on legacy PHP 5.3 through current PHP 8+ and HHVM.
-It's *highly recommended to use the latest supported PHP version* for this project,
+It's _highly recommended to use the latest supported PHP version_ for this project,
 partly due to its vast performance improvements and partly because legacy PHP
 versions require several workarounds as described below.
 

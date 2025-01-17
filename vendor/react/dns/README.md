@@ -11,21 +11,21 @@ easily be used to create a DNS server.
 
 **Table of contents**
 
-* [Basic usage](#basic-usage)
-* [Caching](#caching)
-  * [Custom cache adapter](#custom-cache-adapter)
-* [ResolverInterface](#resolverinterface)
-  * [resolve()](#resolve)
-  * [resolveAll()](#resolveall)
-* [Advanced usage](#advanced-usage)
-  * [UdpTransportExecutor](#udptransportexecutor)
-  * [TcpTransportExecutor](#tcptransportexecutor)
-  * [SelectiveTransportExecutor](#selectivetransportexecutor)
-  * [HostsFileExecutor](#hostsfileexecutor)
-* [Install](#install)
-* [Tests](#tests)
-* [License](#license)
-* [References](#references)
+- [Basic usage](#basic-usage)
+- [Caching](#caching)
+    - [Custom cache adapter](#custom-cache-adapter)
+- [ResolverInterface](#resolverinterface)
+    - [resolve()](#resolve)
+    - [resolveAll()](#resolveall)
+- [Advanced usage](#advanced-usage)
+    - [UdpTransportExecutor](#udptransportexecutor)
+    - [TcpTransportExecutor](#tcptransportexecutor)
+    - [SelectiveTransportExecutor](#selectivetransportexecutor)
+    - [HostsFileExecutor](#hostsfileexecutor)
+- [Install](#install)
+- [Tests](#tests)
+- [License](#license)
+- [References](#references)
 
 ## Basic usage
 
@@ -53,14 +53,14 @@ The `Config` class can be used to load the system default config. This is an
 operation that may access the filesystem and block. Ideally, this method should
 thus be executed only once before the loop starts and not repeatedly while it is
 running.
-Note that this class may return an *empty* configuration if the system config
+Note that this class may return an _empty_ configuration if the system config
 can not be loaded. As such, you'll likely want to apply a default nameserver
 as above if none can be found.
 
 > Note that the factory loads the hosts file from the filesystem once when
-  creating the resolver instance.
-  Ideally, this method should thus be executed only once before the loop starts
-  and not repeatedly while it is running.
+> creating the resolver instance.
+> Ideally, this method should thus be executed only once before the loop starts
+> and not repeatedly while it is running.
 
 But there's more.
 
@@ -263,10 +263,10 @@ $executor = new CoopExecutor(
 ```
 
 > Internally, this class uses PHP's UDP sockets and does not take advantage
-  of [react/datagram](https://github.com/reactphp/datagram) purely for
-  organizational reasons to avoid a cyclic dependency between the two
-  packages. Higher-level components should take advantage of the Datagram
-  component instead of reimplementing this socket logic from scratch.
+> of [react/datagram](https://github.com/reactphp/datagram) purely for
+> organizational reasons to avoid a cyclic dependency between the two
+> packages. Higher-level components should take advantage of the Datagram
+> component instead of reimplementing this socket logic from scratch.
 
 ### TcpTransportExecutor
 
@@ -331,10 +331,10 @@ $executor = new CoopExecutor(
 ```
 
 > Internally, this class uses PHP's TCP/IP sockets and does not take advantage
-  of [react/socket](https://github.com/reactphp/socket) purely for
-  organizational reasons to avoid a cyclic dependency between the two
-  packages. Higher-level components should take advantage of the Socket
-  component instead of reimplementing this socket logic from scratch.
+> of [react/socket](https://github.com/reactphp/socket) purely for
+> organizational reasons to avoid a cyclic dependency between the two
+> packages. Higher-level components should take advantage of the Socket
+> component instead of reimplementing this socket logic from scratch.
 
 ### SelectiveTransportExecutor
 
@@ -418,7 +418,7 @@ See also the [CHANGELOG](CHANGELOG.md) for details about version upgrades.
 This project aims to run on any platform and thus does not require any PHP
 extensions and supports running on legacy PHP 5.3 through current PHP 8+ and
 HHVM.
-It's *highly recommended to use the latest supported PHP version* for this project.
+It's _highly recommended to use the latest supported PHP version_ for this project.
 
 ## Tests
 
@@ -449,5 +449,5 @@ MIT, see [LICENSE file](LICENSE).
 
 ## References
 
-* [RFC 1034](https://tools.ietf.org/html/rfc1034) Domain Names - Concepts and Facilities
-* [RFC 1035](https://tools.ietf.org/html/rfc1035) Domain Names - Implementation and Specification
+- [RFC 1034](https://tools.ietf.org/html/rfc1034) Domain Names - Concepts and Facilities
+- [RFC 1035](https://tools.ietf.org/html/rfc1035) Domain Names - Implementation and Specification

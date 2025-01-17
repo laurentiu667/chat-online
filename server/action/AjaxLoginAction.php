@@ -8,7 +8,7 @@
 
     class AjaxLoginAction extends CommonAction {
         private const SECRET_KEY = "4f3c2e42b6e3127890dcd76584a1d74329de8e243b7d1d2f3c9b8e1f45a6c70d"; 
-        private const TOKEN_EXPIRATION = 3600;
+        private const TOKEN_EXPIRATION = 12000;
         public function __construct() {
             parent::__construct(CommonAction::$VISIBILITY_PUBLIC);
         }
@@ -23,6 +23,9 @@
             if ($username != null && $password) {
                 $passCompare = UserDataBase::returnHashedPassword($username);
                 if (password_verify($password, $passCompare["psw"])) {
+                  
+
+        
                     
                     $_SESSION["username"] = $username;
                     $_SESSION["visibility"] = CommonAction::$VISIBILITY_MEMBER;

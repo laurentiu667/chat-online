@@ -20,7 +20,7 @@ User and API documentation is available on Ratchet's website: http://socketo.me
 
 See https://github.com/cboden/Ratchet-examples for some out-of-the-box working demos using Ratchet.
 
-Need help?  Have a question?  Want to provide feedback?  Write a message on the [Google Groups Mailing List](https://groups.google.com/forum/#!forum/ratchet-php).
+Need help? Have a question? Want to provide feedback? Write a message on the [Google Groups Mailing List](https://groups.google.com/forum/#!forum/ratchet-php).
 
 ---
 
@@ -76,12 +76,15 @@ class MyChat implements MessageComponentInterface {
     $ php chat.php
 
 ```javascript
-    // Then some JavaScript in the browser:
-    var conn = new WebSocket('ws://localhost:8080/echo');
-    conn.onmessage = function(e) { console.log(e.data); };
-    conn.onopen = function(e) { conn.send('Hello Me!'); };
+// Then some JavaScript in the browser:
+var conn = new WebSocket("ws://localhost:8080/echo");
+conn.onmessage = function (e) {
+    console.log(e.data);
+};
+conn.onopen = function (e) {
+    conn.send("Hello Me!");
+};
 ```
 
 [GA Image]: https://github.com/ratchetphp/Ratchet/workflows/CI/badge.svg
-
 [GA Link]: https://github.com/ratchetphp/Ratchet/actions?query=workflow%3A%22CI%22+branch%3Amaster

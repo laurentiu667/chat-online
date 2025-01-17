@@ -1,4 +1,4 @@
-import React from "react";
+
 import {
     BrowserRouter as Router,
     Routes,
@@ -18,8 +18,8 @@ import SessionChecker from "./component/sessionCheck";
 import { HeaderProvider } from "./context/headerContext";
 function App() {
     return (
-        <HeaderProvider>
-            <Router>
+        <Router>
+            <HeaderProvider>
                 <Blob
                     height="70%"
                     width="40%"
@@ -46,8 +46,8 @@ function App() {
                     <Route path="*" element={<Navigate to="/index" />} />
                 </Routes>
                 <Footer />
-            </Router>
-        </HeaderProvider>
+            </HeaderProvider>
+        </Router>
     );
 }
 

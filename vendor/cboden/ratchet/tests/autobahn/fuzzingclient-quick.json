@@ -1,12 +1,16 @@
 {
-    "options": {"failByDrop": false}
-  , "outdir": "reports/rfc"
+    "options": { "failByDrop": false },
+    "outdir": "reports/rfc",
 
-  , "servers": [
-       {"agent": "Ratchet", "url": "ws://localhost:8000", "options": {"version": 18}}
-    ]
+    "servers": [
+        {
+            "agent": "Ratchet",
+            "url": "ws://localhost:8000",
+            "options": { "version": 18 }
+        }
+    ],
 
-  , "cases": ["*"]
-  , "exclude-cases": []
-  , "exclude-agent-cases": {}
+    "cases": ["*"],
+    "exclude-cases": [],
+    "exclude-agent-cases": {}
 }

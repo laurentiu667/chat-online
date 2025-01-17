@@ -1,7 +1,8 @@
 <?php
 
+  // Démarrer la session
+  session_start();
 
-session_start(); 
 
 
 abstract class CommonAction {
