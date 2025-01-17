@@ -1,50 +1,58 @@
-# React + TypeScript + Vite
+# Installation et Lancement de l'Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ce guide vous aidera à configurer et lancer l'application.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Prérequis
 
-## Expanding the ESLint configuration
+Avant de commencer, assurez-vous d'avoir installé les outils suivants :
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [Node.js](https://nodejs.org/)
+- [Composer](https://getcomposer.org/)
 
-- Configure the top-level `parserOptions` property like this:
+---
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Étapes d'installation
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### 1. Installer les dépendances Node.js
+Exécutez la commande suivante dans le terminal pour installer les dépendances Node.js :  
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+```bash
+npm install
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+2. Installer les dépendances PHP
+
+Utilisez Composer pour installer les paquets nécessaires :
+
+composer require firebase/php-jwt
+composer require cboden/ratchet
+
+3. Installer Tailwind CSS et le plugin Motion
+
+Ajoutez les dépendances pour Tailwind CSS et le plugin Motion :
+
+npm i -D tailwindcss-motion
+npm install -D tailwindcss
+
+Lancement de l'Application
+
+Suivez les étapes ci-dessous pour démarrer l'application :
+1. Démarrer le serveur Node.js (mode développement)
+
+Exécutez la commande suivante pour lancer le serveur Node.js :
+
+npm run dev
+
+2. Démarrer le serveur PHP
+
+Lancez un serveur PHP local avec la commande suivante :
+
+php -S localhost:8000
+
+3. Démarrer le serveur de socket
+
+Accédez au répertoire du serveur de socket, puis exécutez la commande correspondante :
+
+cd chat-online/server/socket-server
+php .\Chat-server.php
