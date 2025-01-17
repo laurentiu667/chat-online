@@ -58,4 +58,4 @@ cd chat-online/server/socket-server
 php .\Chat-server.php
 
 ![connexion et page index](https://github.com/laurentiu667/chat-online/blob/main/images-markdown/1.PNG?raw=true)
-![chat](https://github.com/laurentiu667/chat-online/blob/main/images-markdown/2.PNG?raw=true)
+![chat](https://raw.githubusercontent.com/laurentiu667/chat-online/refs/heads/main/images-markdown/2.PNG)
