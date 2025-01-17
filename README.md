@@ -57,5 +57,5 @@ Accédez au répertoire du serveur de socket, puis exécutez la commande corresp
 cd chat-online/server/socket-server
 php .\Chat-server.php
 
-![connexion et page index](images-markdown/1.PNG)
-![chat](images-markdown/2.PNG)
+![connexion et page index](https://github.com/laurentiu667/chat-online/blob/main/images-markdown/1.PNG)
+![chat](https://github.com/laurentiu667/chat-online/blob/main/images-markdown/2.PNG)
